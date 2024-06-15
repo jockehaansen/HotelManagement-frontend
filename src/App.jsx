@@ -1,25 +1,27 @@
-import { useState } from 'react'
-import './App.css'
-import Rooms from './components/pages/Rooms'
-import Customers from './components/pages/Customers'
-import Navbar from './components/navigation/Navbar'
-import HomeScreenNavigationButton from './components/Navigation/HomeScreenNavigationButton'
+import "./App.css";
+import Login from "./components/pages/Login";
+import Rooms from "./components/pages/Rooms";
+import Customers from "./components/pages/Customers";
+import Home from "./components/pages/Home";
+import Bookings from "./components/pages/Bookings";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/navigation/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    //<><Rooms /></>
-    //<><Customers /> </>
-
-    <>
-      <Navbar />
-      <HomeScreenNavigationButton />
-      <HomeScreenNavigationButton />
-      <HomeScreenNavigationButton />
-      <HomeScreenNavigationButton />
-    </>
-  )
+    <Router>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/rooms" element={<Rooms />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/bookings" element={<Bookings />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

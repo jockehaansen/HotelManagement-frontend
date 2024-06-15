@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
-const Customers = () => {
+const Bookings = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/customers", {
-          method: "GET",
-        });
+        const response = await fetch(
+          "http://localhost:8080/bookings/detailed",
+          {
+            method: "GET",
+          }
+        );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -20,78 +23,82 @@ const Customers = () => {
   }, []);
 
   const handleUpdateClick = (id) => {
-    console.log(`Update clicked for customer with id: ${id}`);
+    console.log(`Update clicked for booking with id: ${id}`);
   };
-  const handleAddressClick = (id) => {
-    console.log(`Address clicked for customer with id: ${id}`);
+  const handleCustomerClick = (id) => {
+    console.log(`Customer clicked for booking with id: ${id}`);
   };
-  const handleBookingsClick = (id) => {
-    console.log(`Bookings clicked for customer with id: ${id}`);
+  const handleRoomsClick = (id) => {
+    console.log(`Rooms clicked for booking with id: ${id}`);
   };
 
   return (
     <div>
-      <h1 className="bg-gray-500 text-white p-4">Customers</h1>
+      <h1 className="bg-gray-500 text-white p-4">Bookings</h1>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-200 text-left">
           <tr>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Firstname
+              Booking Number
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Lastname
+              StartDate
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              PhoneNumber
+              EndDate
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Email
+              Price
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Address
+              Created
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Bookings
+              Customer
+            </th>
+            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+              Rooms
             </th>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider"></th>
           </tr>
         </thead>
         <tbody>
-          {data.map((customer, index) => (
+          {data.map((booking, index) => (
             <tr
-              key={customer.id}
+              key={booking.id}
               className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
             >
               <td className="px-6 py-4 whitespace-nowrap">
-                {customer.firstName}
+                {booking.bookingNumber}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {customer.lastName}
+                {booking.startDate}
               </td>
+              <td className="px-6 py-4 whitespace-nowrap">{booking.endDate}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {customer.phoneNumber}
+                {booking.totalPrice}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{booking.created}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleAddressClick(customer.id)}
+                  onClick={() => handleCustomerClick(booking.id)}
                 >
-                  Address
+                  Customer
                 </button>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleBookingsClick(customer.id)}
+                  onClick={() => handleRoomsClick(booking.id)}
                 >
-                  Bookings
+                  Rooms
                 </button>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleUpdateClick(customer.id)}
+                  onClick={() => handleUpdateClick(booking.id)}
                 >
                   Update
                 </button>
@@ -104,4 +111,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default Bookings;

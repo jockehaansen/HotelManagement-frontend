@@ -1,33 +1,33 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 const Rooms = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/rooms', {
-          method: 'GET',
-        })
-        const jsonData = await response.json()
-        setData(jsonData)
+        const response = await fetch("http://localhost:8080/rooms", {
+          method: "GET",
+        });
+        const jsonData = await response.json();
+        setData(jsonData);
       } catch (error) {
-        console.error('Error fetching data', error)
+        console.error("Error fetching data", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const handleClick = (id) => {
-    console.log(`Button clicked for room with id: ${id}`)
-  }
+    console.log(`Button clicked for room with id: ${id}`);
+  };
 
   return (
     <div>
       <h1 className="bg-gray-500 text-white p-4">Rooms</h1>
       <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-200">
+        <thead className="bg-gray-200 text-left">
           <tr>
             <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
               Room Number
@@ -51,7 +51,7 @@ const Rooms = () => {
           {data.map((room, index) => (
             <tr
               key={room.id}
-              className={index % 2 == 0 ? 'bg-white' : 'bg-gray-200'}
+              className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
             >
               <td className="px-6 py-4 whitespace-nowrap">{room.roomNumber}</td>
               <td className="px-6 py-4 whitespace-nowrap">{room.basePrice}</td>
@@ -73,7 +73,7 @@ const Rooms = () => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Rooms
+export default Rooms;
