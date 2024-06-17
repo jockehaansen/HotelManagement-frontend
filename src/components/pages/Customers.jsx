@@ -30,77 +30,82 @@ const Customers = () => {
   };
 
   return (
-    <div>
-      <h1 className="bg-gray-500 text-white p-4">Customers</h1>
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-200 text-left">
-          <tr>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Firstname
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Lastname
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              PhoneNumber
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Email
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Address
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Bookings
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((customer, index) => (
-            <tr
-              key={customer.id}
-              className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
-            >
-              <td className="px-6 py-4 whitespace-nowrap">
-                {customer.firstName}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {customer.lastName}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {customer.phoneNumber}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleAddressClick(customer.id)}
-                >
-                  Address
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleBookingsClick(customer.id)}
-                >
-                  Bookings
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleUpdateClick(customer.id)}
-                >
-                  Update
-                </button>
-              </td>
+    <>
+      {" "}
+      <h1 className="min-w-full bg-gray-500 text-white p-4">Customers</h1>
+      <div className="md:overflow-scroll">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-200 text-left">
+            <tr>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Firstname
+              </th>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Lastname
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                PhoneNumber
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Address
+              </th>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Bookings
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {data.map((customer, index) => (
+              <tr
+                key={customer.id}
+                className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
+              >
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  {customer.firstName}
+                </td>
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  {customer.lastName}
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  {customer.phoneNumber}
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  {customer.email}
+                </td>
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleAddressClick(customer.id)}
+                  >
+                    Address
+                  </button>
+                </td>
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleBookingsClick(customer.id)}
+                  >
+                    Bookings
+                  </button>
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleUpdateClick(customer.id)}
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

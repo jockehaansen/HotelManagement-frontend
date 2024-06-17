@@ -33,81 +33,87 @@ const Bookings = () => {
   };
 
   return (
-    <div>
-      <h1 className="bg-gray-500 text-white p-4">Bookings</h1>
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-200 text-left">
-          <tr>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Booking Number
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              StartDate
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              EndDate
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Price
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Created
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Customer
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
-              Rooms
-            </th>
-            <th className="px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((booking, index) => (
-            <tr
-              key={booking.id}
-              className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
-            >
-              <td className="px-6 py-4 whitespace-nowrap">
-                {booking.bookingNumber}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {booking.startDate}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">{booking.endDate}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {booking.totalPrice}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">{booking.created}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleCustomerClick(booking.id)}
-                >
-                  Customer
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleRoomsClick(booking.id)}
-                >
-                  Rooms
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <button
-                  className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                  onClick={() => handleUpdateClick(booking.id)}
-                >
-                  Update
-                </button>
-              </td>
+    <>
+      <h1 className="min-w-full bg-gray-500 text-white p-4">Bookings</h1>
+      <div className="md:overflow-scroll">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-200 text-left ">
+            <tr>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Booking Number
+              </th>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                StartDate
+              </th>
+              <th className="px-2 md:px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                EndDate
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Price
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Created
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Customer
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider">
+                Rooms
+              </th>
+              <th className="hidden md:table-cell px-6 py-3 text-xs font-medium - text-gray-500 uppercase tracking-wider"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {data.map((booking, index) => (
+              <tr
+                key={booking.id}
+                className={index % 2 == 0 ? "bg-white" : "bg-gray-200"}
+              >
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  {booking.bookingNumber}
+                </td>
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  {booking.startDate}
+                </td>
+                <td className="px-2 md:px-6 py-4 whitespace-nowrap">
+                  {booking.endDate}
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  {booking.totalPrice}
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  {booking.created}
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleCustomerClick(booking.id)}
+                  >
+                    Customer
+                  </button>
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleRoomsClick(booking.id)}
+                  >
+                    Rooms
+                  </button>
+                </td>
+                <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+                    onClick={() => handleUpdateClick(booking.id)}
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
