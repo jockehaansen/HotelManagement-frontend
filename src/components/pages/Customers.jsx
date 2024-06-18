@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Customers = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,7 @@ const Customers = () => {
   }, []);
 
   const handleUpdateClick = (id) => {
-    console.log(`Update clicked for customer with id: ${id}`);
+    navigate("/customer/{email}");
   };
   const handleAddressClick = (id) => {
     console.log(`Address clicked for customer with id: ${id}`);
