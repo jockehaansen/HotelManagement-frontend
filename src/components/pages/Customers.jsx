@@ -25,7 +25,7 @@ const Customers = () => {
     navigate(`${email}`);
   };
   const handleAddressClick = (id) => {
-    console.log(`Address clicked for customer with id: ${id}`);
+    navigate(`/address/detailed/${id}`);
   };
   const handleBookingsClick = (id) => {
     console.log(`Bookings clicked for customer with id: ${id}`);
@@ -81,7 +81,7 @@ const Customers = () => {
                 <td className="px-2 md:px-6 py-4 whitespace-nowrap">
                   <button
                     className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                    onClick={() => handleAddressClick(customer.id)}
+                    onClick={() => handleAddressClick(customer.address.id)}
                   >
                     Address
                   </button>

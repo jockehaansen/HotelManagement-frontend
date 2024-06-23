@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Customer = () => {
+const Address = () => {
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
+    street: "",
+    number: "",
+    zipCode: "",
+    city: "",
+    country: "",
   });
-  const { email } = useParams();
+  const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/customers/${email}`,
+          `http://localhost:8080/address/detailed/${id}`,
           {
             method: "GET",
           }
@@ -28,7 +28,7 @@ const Customer = () => {
       }
     };
     fetchData();
-  }, [email]);
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +41,7 @@ const Customer = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8080/customers/update`, {
+      const response = await fetch(`http://localhost:8080/address/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -51,20 +51,16 @@ const Customer = () => {
       if (response.ok) {
         setIsEditing(false);
       } else {
-        console.error("Error updating customer data");
+        console.error("Error updating address data");
       }
     } catch (error) {
-      console.error("Error updating customer data", error);
+      console.error("Error updating address data", error);
     }
-  };
-
-  const handleAddressClick = (id) => {
-    navigate(`/address/detailed/${id}`);
   };
 
   return (
     <>
-      <h1 className="min-w-full bg-gray-500 text-white p-4">Customer View</h1>
+      <h1 className="min-w-full bg-gray-500 text-white p-4">Address View</h1>{" "}
       <div>
         <form
           onSubmit={handleFormSubmit}
@@ -72,33 +68,41 @@ const Customer = () => {
         >
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={data.firstName}
+            name="street"
+            placeholder="Street"
+            value={data.street}
             onChange={handleInputChange}
             className="my-2 p-2 w-full rounded-lg"
           />
           <input
             type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={data.lastName}
+            name="number"
+            placeholder="Number"
+            value={data.number}
             onChange={handleInputChange}
             className="my-2 p-2 w-full rounded-lg"
           />
           <input
-            type="tel"
-            name="phoneNumber"
-            placeholder="Phone number"
-            value={data.phoneNumber}
+            type="text"
+            name="zipCode"
+            placeholder="ZipCode"
+            value={data.zipCode}
             onChange={handleInputChange}
             className="my-2 p-2 w-full rounded-lg"
           />
           <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={data.email}
+            type="text"
+            name="city"
+            placeholder="City"
+            value={data.city}
+            onChange={handleInputChange}
+            className="my-2 p-2 w-full rounded-lg"
+          />
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={data.country}
             onChange={handleInputChange}
             className="my-2 p-2 w-full rounded-lg"
           />
@@ -108,14 +112,8 @@ const Customer = () => {
           >
             Update
           </button>
-          <button
-            className="my-2 w-56 bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-            onClick={() => handleAddressClick(data.address.id)}
-          >
-            Address
-          </button>
           <button className="my-2 w-56 bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded">
-            Bookings
+            Customers listed on this address
           </button>
         </form>
       </div>
@@ -123,4 +121,4 @@ const Customer = () => {
   );
 };
 
-export default Customer;
+export default Address;

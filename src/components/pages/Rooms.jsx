@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Rooms = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +22,7 @@ const Rooms = () => {
   }, []);
 
   const handleClick = (id) => {
-    console.log(`Button clicked for room with id: ${id}`);
+    navigate(`room/${id}/detailed`);
   };
 
   return (
