@@ -7,7 +7,7 @@ const Bookings = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/bookings/detailed",
+          "http://localhost:8080/bookings",
           {
             method: "GET",
           }
