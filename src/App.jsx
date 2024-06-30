@@ -9,6 +9,7 @@ import Bookings from "./components/pages/Bookings";
 import Address from "./components/pages/Address";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
+import Book from "./components/pages/Book";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/:email" element={<Customer />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/bookings/create" element={<Book /> } />
           <Route path="/login" element={<Login />} />
           <Route path="/address/detailed/:id" element={<Address />} />
         </Routes>

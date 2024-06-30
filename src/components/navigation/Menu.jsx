@@ -23,13 +23,17 @@ const Menu = ({ toggleMenu }) => {
     navigate("/bookings");
     toggleMenu();
   };
+  const handleBookReservationClick = () => {
+    navigate("/bookings/create");
+    toggleMenu();
+  };
 
   return (
     <ul className="min-w-screen mt-12 text-gray-700 font-bold text-m bg-white p-2 rounded-md shadow-lg">
       <li className="p-2 hover:text-gray-400" onClick={handleHomeClick}>
         Home
       </li>
-      <li className="p-2 hover:text-gray-400">Book Reservation</li>
+      <li className="p-2 hover:text-gray-400" onClick={handleBookReservationClick}>Book Reservation</li>
       <li className="p-2 hover:text-gray-400">Contact Us</li>
       <li className="p-2 hover:text-gray-400" onClick={handleLoginClick}>
         Login
