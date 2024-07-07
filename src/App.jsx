@@ -10,6 +10,7 @@ import Address from "./components/pages/Address";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import Book from "./components/pages/Book";
+import Confirmation from "./components/pages/Confirmation";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/bookings/create" element={<Book /> } />
           <Route path="/login" element={<Login />} />
           <Route path="/address/detailed/:id" element={<Address />} />
+          <Route path="/bookings/confirmation" element={<Confirmation />} />
         </Routes>
       </div>
     </Router>
