@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Book = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
-    startDate: '',
-    endDate: '',
-    email: '',
+    startDate: "",
+    endDate: "",
+    email: "",
     guests: 1,
-    customerEmail: '',
-    roomID: null,
+    customerEmail: "",
+    roomId: null,
   });
 
   const [data, setData] = useState([]);
@@ -21,22 +21,21 @@ const Book = () => {
   };
 
   const handleRoomClick = (roomId) => {
-      setFormValues((prevFormValues) => ({
-        ...prevFormValues,
-        roomID: roomId,
-      }))
-      bookRoom(formValues)
-      
-    };
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      roomId: roomId,
+    }));
+    bookRoom(formValues);
+  };
 
   const fetchRoom = async () => {
     try {
       const response = await fetch("http://localhost:8080/bookings/find", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(formValues),
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -49,29 +48,39 @@ const Book = () => {
   };
 
   const bookRoom = async (formValues) => {
-    console.log('Formvalues before booking is sent', formValues)
     try {
       const response = await fetch("http://localhost:8080/bookings/create", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(formValues),
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+
+      if (response.status === 302) {
+        const redirectUrl = await response.text(); // Assuming the redirect URL is sent as text
+        navigate(redirectUrl);
+        return;
       }
+
+      if (!response.ok) {
+        throw new Error("Booking request failed");
+      }
+
       const responseData = await response.json();
-      navigate('/bookings/confirmation', { state: {booking : responseData}})
+      navigate("/bookings/confirmation", { state: { booking: responseData } });
     } catch (error) {
       console.error("Error fetching booking confirmation", error);
+      // Handle other error scenarios
     }
   };
 
   return (
-    <>      
+    <>
       <div>
-      <h1 className="min-w-full bg-gray-500 text-white p-4">Book Reservation</h1>
+        <h1 className="min-w-full bg-gray-500 text-white p-4">
+          Book Reservation
+        </h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <label htmlFor="startDate">From</label>
           <input
@@ -79,7 +88,9 @@ const Book = () => {
             name="startDate"
             id="startDate"
             value={formValues.startDate}
-            onChange={(e) => setFormValues({ ...formValues, startDate: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, startDate: e.target.value })
+            }
           />
           <label htmlFor="endDate">Until</label>
           <input
@@ -87,7 +98,9 @@ const Book = () => {
             name="endDate"
             id="endDate"
             value={formValues.endDate}
-            onChange={(e) => setFormValues({ ...formValues, endDate: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, endDate: e.target.value })
+            }
           />
           <label htmlFor="guests">Guests</label>
           <input
@@ -97,17 +110,26 @@ const Book = () => {
             value={formValues.guests}
             min={1}
             max={4}
-            onChange={(e) => setFormValues({ ...formValues, guests: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, guests: e.target.value })
+            }
           />
-          <label htmlFor='email'>Email</label>
+          <label htmlFor="email">Email</label>
           <input
-            type='email'
-            name='email'
-            id='email'
+            type="email"
+            name="email"
+            id="email"
             value={formValues.customerEmail}
-            onChange={(e) => setFormValues({ ...formValues, customerEmail: e.target.value })}
+            onChange={(e) =>
+              setFormValues({ ...formValues, customerEmail: e.target.value })
+            }
           />
-          <button type="submit" className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded">Find rooms</button>
+          <button
+            type="submit"
+            className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+          >
+            Find rooms
+          </button>
         </form>
       </div>
 
@@ -117,17 +139,30 @@ const Book = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-200 text-left">
               <tr>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Room Number</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Base Price</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Beds</th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Room Number
+                </th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Base Price
+                </th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Beds
+                </th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {data.map((room, index) => (
-                <tr key={room.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-200'}>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.roomNumber}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.basePrice}</td>
+                <tr
+                  key={room.id}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-200"}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {room.roomNumber}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {room.basePrice}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">{room.beds}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button

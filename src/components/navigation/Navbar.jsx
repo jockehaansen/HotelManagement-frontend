@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Menu from "./Menu";
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleBookNowClick = () => {
+    navigate("/bookings/create")
+  }
 
   return (
     //list items will link to endpoints or pages
@@ -16,7 +23,7 @@ const Navbar = () => {
         <ul className="flex justify-between items-center text-gray-700 font-bold text-m px-4">
           <li className="px-2 hover:text-gray-400">LOGO</li>
           <div className="flex">
-            <li className="px-2 hover:text-gray-400 cursor-pointer">
+            <li className="px-2 hover:text-gray-400 cursor-pointer" onClick={handleBookNowClick}>
               Book Now
             </li>
             <li

@@ -1,6 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  const handleRegisterClick = () => {
+      navigate("/register")
+  }
+
+
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col mt-16 w-96">
@@ -32,6 +41,12 @@ const Login = () => {
         <a href="/" className="self-center mt-4 text-gray-700 font-bold ">
           Forgot password
         </a>
+        <button
+          className=" bg-cyan-300 text-white font-bold  w-24 mt-4 min-h-8 rounded-md self-center"
+          onClick={handleRegisterClick}
+        >
+          Register
+        </button>
       </div>
     </div>
   );

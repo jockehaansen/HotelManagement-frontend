@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import Book from "./components/pages/Book";
 import Confirmation from "./components/pages/Confirmation";
+import RegisterCustomer from "./components/pages/RegisterCustomer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/address/detailed/:id" element={<Address />} />
           <Route path="/bookings/confirmation" element={<Confirmation />} />
+          <Route path="/register" element={<RegisterCustomer />} />
         </Routes>
       </div>
     </Router>
