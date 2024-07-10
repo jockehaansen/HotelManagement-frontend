@@ -7,7 +7,6 @@ const Book = () => {
   const [formValues, setFormValues] = useState({
     startDate: "",
     endDate: "",
-    email: "",
     guests: 1,
     customerEmail: "",
     roomId: null,
@@ -25,7 +24,29 @@ const Book = () => {
       ...prevFormValues,
       roomId: roomId,
     }));
-    bookRoom(formValues);
+    // Book the room with the updated form values after state has been set
+    setTimeout(() => bookRoom({ ...formValues, roomId }), 0);
+  };
+
+  const handleStartDateChange = (e) => {
+    const newStartDate = e.target.value;
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      startDate: newStartDate,
+      endDate:
+        prevFormValues.endDate &&
+        new Date(prevFormValues.endDate) < new Date(newStartDate)
+          ? ""
+          : prevFormValues.endDate,
+    }));
+  };
+
+  const handleEndDateChange = (e) => {
+    const newEndDate = e.target.value;
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      endDate: newEndDate,
+    }));
   };
 
   const fetchRoom = async () => {
@@ -88,9 +109,7 @@ const Book = () => {
             name="startDate"
             id="startDate"
             value={formValues.startDate}
-            onChange={(e) =>
-              setFormValues({ ...formValues, startDate: e.target.value })
-            }
+            onChange={handleStartDateChange}
           />
           <label htmlFor="endDate">Until</label>
           <input
@@ -98,9 +117,8 @@ const Book = () => {
             name="endDate"
             id="endDate"
             value={formValues.endDate}
-            onChange={(e) =>
-              setFormValues({ ...formValues, endDate: e.target.value })
-            }
+            onChange={handleEndDateChange}
+            min={formValues.startDate}
           />
           <label htmlFor="guests">Guests</label>
           <input
@@ -114,11 +132,11 @@ const Book = () => {
               setFormValues({ ...formValues, guests: e.target.value })
             }
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="customerEmail">Email</label>
           <input
             type="email"
-            name="email"
-            id="email"
+            name="customerEmail"
+            id="customerEmail"
             value={formValues.customerEmail}
             onChange={(e) =>
               setFormValues({ ...formValues, customerEmail: e.target.value })
@@ -163,7 +181,9 @@ const Book = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {room.basePrice}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.beds}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {room.capacity}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
