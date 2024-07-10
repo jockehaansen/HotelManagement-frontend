@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8080/bookings",
-          {
-            method: "GET",
-          }
-        );
+        const response = await fetch("http://localhost:8080/bookings", {
+          method: "GET",
+        });
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -23,10 +22,10 @@ const Bookings = () => {
   }, []);
 
   const handleUpdateClick = (id) => {
-    console.log(`Update clicked for booking with id: ${id}`);
+    navigate(`/customers/${email}`);
   };
-  const handleCustomerClick = (id) => {
-    console.log(`Customer clicked for booking with id: ${id}`);
+  const handleCustomerClick = (email) => {
+    navigate(`/customers/${email}`);
   };
   const handleRoomsClick = (id) => {
     console.log(`Rooms clicked for booking with id: ${id}`);
@@ -87,7 +86,7 @@ const Bookings = () => {
                 <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
                   <button
                     className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
-                    onClick={() => handleCustomerClick(booking.id)}
+                    onClick={() => handleCustomerClick(booking.customer.email)}
                   >
                     Customer
                   </button>

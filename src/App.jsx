@@ -16,7 +16,7 @@ import RegisterCustomer from "./components/pages/RegisterCustomer";
 function App() {
   return (
     <Router>
-      <div>
+      <div className="min-h-screen">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -25,7 +25,7 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/:email" element={<Customer />} />
           <Route path="/bookings" element={<Bookings />} />
-          <Route path="/bookings/create" element={<Book /> } />
+          <Route path="/bookings/create" element={<Book />} />
           <Route path="/login" element={<Login />} />
           <Route path="/address/detailed/:id" element={<Address />} />
           <Route path="/bookings/confirmation" element={<Confirmation />} />

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const Rooms = () => {
-  const [ data, setData ] = useState([])
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,8 +15,8 @@ const Rooms = () => {
         console.error("Error fetching data", error);
       }
     };
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -26,20 +26,34 @@ const Rooms = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-200 text-left">
               <tr>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Room Number</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Base Price</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Beds</th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Room Number
+                </th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Base Price
+                </th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Beds
+                </th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {data.map((room, index) => (
-                <tr key={room.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-200'}>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.roomNumber}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.basePrice}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{room.beds}</td>
+                <tr
+                  key={room.id}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-200"}
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
+                    {room.roomNumber}
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {room.basePrice}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {room.capacity}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap"></td>
                 </tr>
               ))}
             </tbody>
