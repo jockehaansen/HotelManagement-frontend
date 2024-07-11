@@ -6,8 +6,9 @@ const RegisterCustomer = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    Address: {
+    address: {
       street: "",
+      number: "",
       zipCode: "",
       city: "",
       country: "",
@@ -23,8 +24,8 @@ const RegisterCustomer = () => {
     } else {
       setFormValues({
         ...formValues,
-        Address: {
-          ...formValues.Address,
+        address: {
+          ...formValues.address,
           [name]: value,
         },
       });
@@ -34,7 +35,26 @@ const RegisterCustomer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formValues);
+    createCustomer(formValues);
     // Add logic to submit formValues to backend or perform further actions
+  };
+
+  const createCustomer = async (formValues) => {
+    try {
+      const response = await fetch("http://localhost:8080/customers/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (!response.ok) {
+        throw new Error("Customer creation failed");
+      }
+    } catch (error) {
+      console.log("Error fetching customer data", error);
+    }
   };
 
   return (
@@ -73,28 +93,35 @@ const RegisterCustomer = () => {
           type="text"
           name="street"
           placeholder="Street"
-          value={formValues.Address.street}
+          value={formValues.address.street}
+          onChange={handleFormChange}
+        />
+        <input
+          type="text"
+          name="number"
+          placeholder="number"
+          value={formValues.address.number}
           onChange={handleFormChange}
         />
         <input
           type="text"
           name="zipCode"
           placeholder="ZipCode"
-          value={formValues.Address.zipCode}
+          value={formValues.address.zipCode}
           onChange={handleFormChange}
         />
         <input
           type="text"
           name="city"
           placeholder="City"
-          value={formValues.Address.city}
+          value={formValues.address.city}
           onChange={handleFormChange}
         />
         <input
           type="text"
           name="country"
           placeholder="Country"
-          value={formValues.Address.country}
+          value={formValues.address.country}
           onChange={handleFormChange}
         />
         <button
