@@ -98,33 +98,44 @@ const Book = () => {
 
   return (
     <>
-      <div>
-        <h1 className="min-w-full bg-gray-500 text-white p-4">
+      <div className=" w-9/12 m-auto mt-6 bg-slate-100 rounded-lg">
+        <h1 className="min-w-full bg-gray-500 text-white p-4 rounded-lg">
           Book Reservation
         </h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
-          <label htmlFor="startDate">From</label>
+          <label htmlFor="startDate" className="h-4 my-2 px-2">
+            From
+          </label>
           <input
             type="date"
             name="startDate"
             id="startDate"
+            required="required"
+            className="h-12 my-2 px-2"
             value={formValues.startDate}
             onChange={handleStartDateChange}
           />
-          <label htmlFor="endDate">Until</label>
+          <label htmlFor="endDate" className="h-4 my-2 px-2">
+            Until
+          </label>
           <input
             type="date"
             name="endDate"
             id="endDate"
+            className="h-12 my-2 px-2"
+            required="required"
             value={formValues.endDate}
             onChange={handleEndDateChange}
             min={formValues.startDate}
           />
-          <label htmlFor="guests">Guests</label>
+          <label htmlFor="guests" className="h-4 my-2 px-2">
+            Guests
+          </label>
           <input
             type="number"
             name="guests"
             id="guests"
+            className="h-12 my-2 px-2"
             value={formValues.guests}
             min={1}
             max={4}
@@ -132,11 +143,16 @@ const Book = () => {
               setFormValues({ ...formValues, guests: e.target.value })
             }
           />
-          <label htmlFor="customerEmail">Email</label>
+          <label htmlFor="customerEmail" className="h-4 my-2 px-2">
+            Email
+          </label>
           <input
             type="email"
             name="customerEmail"
             id="customerEmail"
+            className="h-12 my-2 px-2"
+            placeholder="email address"
+            required="required"
             value={formValues.customerEmail}
             onChange={(e) =>
               setFormValues({ ...formValues, customerEmail: e.target.value })
@@ -144,7 +160,7 @@ const Book = () => {
           />
           <button
             type="submit"
-            className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded"
+            className="bg-slate-500 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded w-1/3 m-auto h-12"
           >
             Find rooms
           </button>
@@ -152,7 +168,7 @@ const Book = () => {
       </div>
 
       {data.length > 0 && (
-        <div>
+        <div className="mt-12 w-/12 m-auto">
           <h1 className="bg-gray-500 text-white p-4">Rooms</h1>
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-200 text-left">
